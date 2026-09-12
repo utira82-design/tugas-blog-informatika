@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aliya's Little Universe</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Nunito:wght@400;600;700;800&family=VT323&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --midnight: #101936;
+            --blue: #4269c9;
+            --periwinkle: #8295e8;
+            --ice: #dce7ff;
+            --lavender: #c9cff7;
+            --pink: #e38bb5;
+            --white: #f7f9ff;
+            --text: #26365d;
+            --pixel: 'VT323', monospace;
+            --round: 'Nunito', sans-serif;
+            --serif: 'DM Serif Display', Georgia, serif;
+        }
+
+        * { box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            margin: 0;
+            padding: 28px 14px 45px;
+            color: var(--text);
+            background:
+                radial-gradient(circle at 8% 10%, rgba(130,149,232,.22), transparent 25%),
+                radial-gradient(circle at 92% 75%, rgba(227,139,181,.12), transparent 25%),
+                var(--white);
+            font: 13px/1.45 var(--round);
+        }
+        a { color: inherit; }
+        .site {
+            width: min(100%, 980px);
+            margin: auto;
+            overflow: hidden;
+            background: rgba(255,255,255,.68);
+            border: 1px solid rgba(66,105,201,.25);
+            box-shadow: 0 18px 50px rgba(16,25,54,.10);
+        }
+
+        /* A deliberately small browser frame, inspired by old personal sites. */
+        .browser {
+            position: relative;
+            padding-top: 26px;
+            background: rgba(220,231,255,.62);
+            border-bottom: 1px solid rgba(66,105,201,.25);
+            backdrop-filter: blur(16px);
+        }
+        .browser-tab {
+            position: absolute;
+            top: -2px;
+            left: 22px;
+            padding: 5px 34px 5px 20px;
+            color: var(--midnight);
+            background: var(--lavender);
+            clip-path: polygon(0 0, 92% 0, 100% 100%, 0 100%);
+            font-weight: 800;
+        }
+        .browser-tools {
+            display: grid;
+            grid-template-columns: 100px 1fr 100px;
+            align-items: center;
+            gap: 12px;
+            padding: 11px 18px;
+            border-top: 1px solid rgba(66,105,201,.15);
+            border-bottom: 1px solid rgba(66,105,201,.15);
+            color: var(--blue);
+            font-size: 23px;
+        }
+        .browser-tools .left, .browser-tools .right { display: flex; gap: 15px; align-items: center; }
+        .browser-tools .right { justify-content: flex-end; }
+        .address {
+            max-width: 430px;
+            width: 100%;
+            margin: auto;
+            padding: 5px 18px;
+            color: var(--midnight);
+            background: rgba(255,255,255,.58);
+            border-radius: 24px;
+            text-align: center;
+            font-size: 16px;
+        }
+        .ticker {
+            overflow: hidden;
+            padding: 5px 10px;
+            color: var(--midnight);
+            background: rgba(201,207,247,.58);
+            font: 17px var(--pixel);
+            letter-spacing: .5px;
+            white-space: nowrap;
+            text-align: center;
+        }
+        .ticker span { display: inline-block; }
+        @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+        header { padding: 18px 28px 15px; text-align: center; }
+        .site-kicker { margin: 0 0 2px; color: var(--blue); font: 22px var(--pixel); letter-spacing: 1px; }
+        h1 { margin: 0; color: var(--midnight); font: 400 clamp(2.4rem, 7vw, 4.8rem)/.95 var(--serif); }
+        .tagline { margin: 7px auto 12px; color: #53658f; font-size: 14px; }
+        .meta { display: flex; justify-content: center; flex-wrap: wrap; gap: 8px 24px; color: #53658f; font: 16px var(--pixel); text-transform: uppercase; }
+        .meta span::before { content: '✦ '; color: var(--pink); }
+        nav { display: flex; justify-content: center; flex-wrap: wrap; gap: 7px; padding: 10px 16px; background: rgba(66,105,201,.9); border-top: 1px solid rgba(255,255,255,.3); border-bottom: 1px solid rgba(16,25,54,.18); }
+        nav a { padding: 2px 12px; color: white; text-decoration: none; font-weight: 800; text-transform: uppercase; }
+        nav a:hover { color: var(--pink); }
+
+        .stripe { height: 18px; background: repeating-linear-gradient(90deg, rgba(130,149,232,.42) 0 18px, rgba(220,231,255,.72) 18px 32px); border-block: 1px solid rgba(66,105,201,.18); }
+        main { padding: 18px 18px 26px; }
+        .main-grid { display: grid; grid-template-columns: 1fr 1.45fr 1fr; gap: 18px; align-items: start; }
+        .column { min-width: 0; }
+        .section-title { margin: 0 0 8px; color: var(--blue); font: 30px/.9 var(--pixel); letter-spacing: 1px; text-transform: uppercase; }
+        .box {
+            padding: 12px;
+            background: rgba(255,255,255,.58);
+            border: 1px solid rgba(66,105,201,.25);
+            box-shadow: 0 8px 24px rgba(16,25,54,.07);
+            backdrop-filter: blur(12px);
+        }
+        .box + .box { margin-top: 14px; }
+        .photo-frame { display: grid; place-items: center; min-height: 205px; padding: 12px; background: var(--ice); border: 7px solid var(--white); outline: 1px solid rgba(66,105,201,.25); color: var(--blue); text-align: center; }
+        .photo-frame .fake-image { width: 100%; min-height: 175px; display: grid; place-items: center; padding: 20px; background: repeating-linear-gradient(135deg, rgba(255,255,255,.5) 0 12px, rgba(201,207,247,.45) 12px 24px); font: 26px var(--pixel); }
+        .tiny-label { margin: 0 0 7px; color: var(--blue); font: 18px var(--pixel); text-transform: uppercase; }
+        .profile h2 { margin: 9px 0 5px; color: var(--midnight); font: 400 27px/1 var(--serif); }
+        .profile p { margin: 7px 0; }
+        .stars { color: var(--pink); font: 16px var(--pixel); letter-spacing: .5px; }
+        .welcome { padding: 3px 12px; color: var(--text); text-align: center; }
+        .welcome h2 { margin: 0 0 12px; color: var(--blue); font: 38px/.9 var(--pixel); }
+        .welcome p { margin: 0 0 11px; text-align: left; }
+        .welcome strong { color: var(--pink); }
+        .mini-heading { margin: 15px 0 6px; color: var(--blue); font: 27px/.9 var(--pixel); }
+        .list { padding-left: 17px; margin: 5px 0; }
+        .list li { margin: 3px 0; }
+        .side-card h3 { margin: 0 0 7px; color: var(--blue); font: 24px var(--pixel); text-transform: uppercase; }
+        .side-card p { margin: 5px 0; }
+        .highlight { background: rgba(201,207,247,.32); border-color: rgba(130,149,232,.42); }
+        .highlight h3 { color: var(--pink); }
+        .side-card .label { color: var(--blue); font-weight: 800; }
+        .button { display: block; margin-top: 10px; padding: 5px 8px; color: white; background: var(--blue); text-align: center; text-decoration: none; font-weight: 800; }
+        .button:hover { background: var(--pink); }
+
+        .lower { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 18px; margin-top: 20px; padding: 18px 0 0; border-top: 1px solid rgba(66,105,201,.25); }
+        .lower .box { min-height: 155px; background: rgba(220,231,255,.62); color: var(--midnight); }
+        .lower .section-title { color: var(--blue); }
+        .lower .photo-frame { min-height: 130px; padding: 7px; }
+        .lower .photo-frame .fake-image { min-height: 110px; }
+        .lower .stars { color: var(--pink); }
+        .anime-list { display: flex; flex-wrap: wrap; gap: 6px; }
+        .anime-list span {
+            padding: 4px 8px;
+            background: rgba(255,255,255,.65);
+            border: 1px solid rgba(66,105,201,.18);
+            font-size: 11px;
+        }
+        .archive { margin-top: 20px; padding: 17px; border-top: 2px dashed rgba(66,105,201,.25); text-align: center; }
+        .archive p { margin: 4px; font: 24px var(--serif); font-style: italic; }
+        footer { padding: 12px; color: var(--text); background: rgba(220,231,255,.45); border-top: 1px solid rgba(66,105,201,.18); text-align: center; font: 16px var(--pixel); }
+
+        @media (max-width: 760px) {
+            body { padding: 12px 8px 28px; }
+            .site { box-shadow: 4px 4px 0 rgba(88, 164, 186, .25); }
+            .browser-tools { grid-template-columns: 70px 1fr 70px; padding-inline: 10px; font-size: 19px; }
+            .browser-tools .left, .browser-tools .right { gap: 8px; }
+            .main-grid, .lower { grid-template-columns: 1fr 1fr; }
+            .welcome { grid-column: 1 / -1; grid-row: 1; }
+            .lower .box:last-child { grid-column: 1 / -1; }
+        }
+        @media (max-width: 500px) {
+            header { padding-inline: 14px; }
+            .meta { font-size: 14px; }
+            .main-grid, .lower { grid-template-columns: 1fr; }
+            .welcome { grid-column: auto; }
+            .lower .box:last-child { grid-column: auto; }
+            main { padding-inline: 11px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="site">
+        <div class="browser">
+            <div class="browser-tab">aliya's corner</div>
+            <div class="browser-tools">
+                <div class="left" aria-hidden="true">‹　⌂　›</div>
+                <div class="address">https://aliya-littleuniverse/</div>
+                <div class="right" aria-hidden="true">☰　↗　×</div>
+            </div>
+            <div class="ticker"><span>✦ selamat datang di sudut kecil internetku ✦</span></div>
+        </div>
+
+        <header id="home">
+            <p class="site-kicker">catatan kecil · 2026</p>
+            <h1>Aliya's Little Universe</h1>
+            <p class="tagline">tempat buat nyimpen buku, lagu, gambar, tontonan, dan hal-hal kecil yang lagi kusukai.</p>
+            <div class="meta"><span>terakhir diperbarui · september 2026</span><span>suasana · sore mendung</span><span>sedang · baca sesuatu</span></div>
+        </header>
+        <nav aria-label="Navigasi utama"><a href="#home">beranda</a><a href="#about">tentang</a><a href="#life">sehari-hari</a><a href="#create">gambar</a><a href="#books">buku</a><a href="#music">musik</a><a href="#fandoms">fandom</a></nav>
+        <div class="stripe" aria-hidden="true"></div>
+
+        <main>
+            <div class="main-grid">
+                <div class="column">
+                    <section class="box profile" id="about">
+                        <div class="photo-frame"><div class="fake-image">♡<br>foto dari<br>galeri</div></div>
+                        <h2>HAI, AKU ALIYA.</h2>
+                        <p>Hai! Ini website kecil yang isinya campur-campur. Ada buku, musik, gambar, tontonan, dan hal-hal yang kebetulan lagi menarik perhatianku.</p>
+                        <p class="tiny-label">✦ yang ada di sini</p>
+                        <p>buku · musik · gambar · cerita · film · anime · manhwa</p>
+                        <div class="stars">★★★★★★★★★☆</div>
+                    </section>
+                    <section class="box side-card" id="books">
+                        <h3>bulan ini</h3>
+                        <p><span class="label">buku</span> — lanjut baca yang kemarin</p>
+                        <p><span class="label">lagu</span> — diputar berkali-kali</p>
+                        <p><span class="label">tontonan</span> — masih di episode yang sama</p>
+                        <p><span class="label">lagi cari</span> — referensi gambar</p>
+                    </section>
+                </div>
+
+                <section class="welcome" id="life">
+                    <h2>DI SINI ADA APA?</h2>
+                    <p>Sebenarnya tidak ada aturan khusus. Aku cuma pengin punya satu tempat buat nyimpen hal-hal yang kusuka dan nggak hilang begitu saja di antara folder, galeri, bookmark, dan catatan HP.</p>
+                    <p>Isinya bisa berubah-ubah. Hari ini mungkin buku, besok musik, lusa malah bahas anime. Jadi ya, lihat saja nanti.</p>
+                    <h3 class="mini-heading">CATATAN KECIL</h3>
+                    <p>Website ini juga bukan tempat buat terlihat sempurna. Anggap saja seperti buka satu halaman dari buku catatan yang isinya belum tentu rapi.</p>
+                    <div class="box highlight" style="margin-top: 18px; text-align: left;">
+                        <p class="tiny-label">sedikit tentang hariku</p>
+                        <p><strong>06:30</strong> bangun dan siap-siap sekolah.</p>
+                        <p><strong>07:30</strong> mulai pelajaran dan menunggu jam istirahat.</p>
+                        <p><strong>16:30</strong> pulang. Istirahat sebentar, katanya.</p>
+                        <p><strong>18:00</strong> buka HP dengan niat cuma sebentar.</p>
+                        <p><strong>21:30</strong> masih belum selesai dengan semua yang mau dikerjakan.</p>
+                        <p><strong>23:00</strong> “satu bab lagi.”</p>
+                        <a class="button" href="#life">lihat cerita lengkap →</a>
+                    </div>
+                </section>
+
+                <aside class="column">
+                    <section class="box side-card">
+                        <h3>sekarang</h3>
+                        <p>membaca: novel fantasi</p>
+                        <p>mendengarkan: CORTIS / ILLIT / ITZY / SKZ</p>
+                        <p>menonton: K-drama / anime</p>
+                        <p>baca juga: manhwa</p>
+                    </section>
+                    <section class="box side-card highlight" id="music">
+                        <h3>playlist</h3>
+                        <p><strong>Lost in the Static</strong></p>
+                        <p>lagu-lagu yang akhir-akhir ini sering diputar.</p>
+                        <a class="button" href="https://open.spotify.com/playlist/07L6ty6TkhrQA6zMgnLkUy" target="_blank" rel="noopener noreferrer">
+                            dengarkan →
+                        </a>
+                    </section>
+                    <section class="box side-card" id="fandoms">
+                        <h3>daftar tontonan</h3>
+                        <ul class="list"><li>K-drama</li><li>anime</li><li>manhwa</li><li>film yang belum selesai ditonton</li></ul>
+                    </section>
+                </aside>
+            </div>
+
+            <div class="stripe" aria-hidden="true" style="margin: 20px -18px 0;"></div>
+            <div class="lower" id="create">
+                <section class="box anime-box"><h2 class="section-title">anime yang pernah ditonton</h2><p>Beberapa anime yang pernah mampir ke watch history.</p><div class="anime-list"><span>Spy × Family</span><span>Beastars</span><span>Frieren</span><span>Jujutsu Kaisen</span><span>Attack on Titan</span><span>Demon Slayer</span><span>My Hero Academia</span><span>Death Note</span><span>Assassination Classroom</span><span>Horimiya</span><span>Kamisama Kiss</span><span>Shikimori's Not Just a Cutie</span><span>My Dress-Up Darling</span><span>Go For It, Nakamura-kun!!</span></div></section>
+                <section class="box"><div class="photo-frame"><div class="fake-image">✦<br>halaman dari<br>sketchbook</div></div></section>
+                <section class="box"><h2 class="section-title">random things</h2><p>buku dengan sampul bagus, langit mendung, makanan enak, gambar yang lucu, film lama, toko buku, hujan, wallpaper HP, dan benda-benda kecil yang entah kenapa menarik.</p><div class="stars">★★★★★★★★★★</div></section>
+            </div>
+            <section class="archive"><div class="tiny-label">mini archive</div><p>sedikit koleksi dari sini.</p></section>
+        </main>
+        <footer>ALIYA'S LITTLE UNIVERSE © 2026 · dibuat dari buku, musik, gambar, dan sedikit waktu luang.</footer>
+    </div>
+</body>
+</html>
